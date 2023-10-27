@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content='text/html;charset=utf-8' http-equiv=Content-Type>
+<meta name=viewport content='width=device-width,user-scalable=no'>
+<link rel='shortcut icon' href='Logo/Akalc Logo.png'>
+<title>Akalc</title>
+</head>
+<body>
+<style>div{background-color:rgba(255,255,255,.9)}</style>
+<style>
+.dg{position:fixed;top:50%;left:50%;border-style:outset;border-radius:10px;text-align:center;padding:10px;box-shadow:0 0 25px #aaaaaa;animation:savy 1s;-webkit-animation:savy 1s}
+@-webkit-keyframes spin{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}
+@-webkit-keyframes savy{from{-webkit-transform:scale(0)}to{-webkit-transform:scale(1)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes savy{from{transform:scale(0)}to{transform:scale(1)}}
+::-webkit-input-placeholder{text-align:center}
+:-ms-input-placeholder{text-align:center}
+input:not(#nm){width:100px;height:20px}
+::-moz-placeholder{text-align:center}
+:-moz-placeholder{text-align:center}
+html{-webkit-touch-callout:none;
+-webkit-user-select:none;
+-khtml-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+white-space:nowrap;
+user-select:none}
+</style><div id=hd style=position:fixed;top:0;left:0;text-align:center;width:100%;display:none><span style=color:blue;font-size:30px;font-weight:bold>Akalc <sup style=font-size:15px>Spreadsheet by Akhil T</sup></span><br><span style=position:relative;left:-3%;font-size:20px;color:blue;cursor:pointer title='New File (Ctrl+E)' id=nfl>+</span><span style=font-size:20px;cursor:pointer title='Save (Ctrl+S)' id=sve>&#x1f4be;</span><span style=position:relative;left:3%;font-size:20px;cursor:pointer title='Dark Mode (Ctrl+D)' id=drk>&#x1F31B;</span></div><br><br><div id=ld style='position:fixed;top:50%;left:50%;font-size:100vmin;color:blue;animation:spin 1s 1s infinite;-webkit-animation:spin 1s 1s infinite'>A</div>
+<script>
+be=1;lve=0;dark=1
+chachan(document.getElementById('ld'));if(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches)dark=0;mode()
+window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(akt){if(akt.matches){if(!dark)mode()}else{if(dark)mode()}})
+function chachan(tomy){tomy.style.marginTop='-'+tomy.offsetHeight/2+'px';tomy.style.marginLeft='-'+tomy.offsetWidth/2+'px'}
+function mode(){if(dark){dark=0;document.getElementsByTagName('style')[0].innerHTML='div{background-color:rgba(255,255,255,.9)}';document.getElementById('drk').title='Dark Mode (Ctrl+D)';document.getElementById('drk').innerHTML='&#x1F31B;';window.addEventListener('scroll',scrl);scrl()}else{dark=1;document.getElementsByTagName('style')[0].innerHTML='body,input,button{background-color:black;color:white}div{background-color:rgba(0,0,0,.9)}';document.getElementById('drk').title='Light Mode (Ctrl+D)';document.getElementById('drk').innerHTML='&#x1F31E;';window.removeEventListener('scroll',scrl);document.getElementById('hd').style.boxShadow=''}}
+function scrl(){pos=document.body.scrollTop||document.documentElement.scrollTop;if(pos<=10){document.getElementById('hd').style.boxShadow='0 '+pos/2+'px '+pos/2+'px #aaaaaa'}else{document.getElementById('hd').style.boxShadow='0 5px 5px #aaaaaa'}}
+window.addEventListener('load',function(){setTimeout(function(){for(i=1;i<101;i++){document.body.appendChild(document.createElement('br'));for(j=1;j<101;j++){t=document.createElement('input');ti=j+':'+i;t.setAttribute('id',ti);t.setAttribute('placeholder',ti);document.body.appendChild(t)}}document.getElementById('sve').addEventListener('click',akhil);document.getElementById('nfl').addEventListener('click',amma);document.getElementById('drk').addEventListener('click',mode)
+document.addEventListener('keydown',function(e){if(e.ctrlKey&&e.keyCode==83){e.preventDefault();akhil()}else if(e.ctrlKey&&e.keyCode==69){e.preventDefault();amma()}else if(e.ctrlKey&&e.keyCode==68){e.preventDefault();mode()}else if(e.keyCode==13){if(!be){(document.getElementById('sv')||document.getElementById('ys')).click()}}else if(e.keyCode==27){if(!be){document.getElementsByClassName('dg')[0].remove();be=1}}else{if(document.activeElement.tagName=='INPUT')lve=1}})
+window.addEventListener('beforeunload',function(event){if(lve)event.returnValue=0})
+function amma(){if(be){be=0;ak=document.createElement('div');ak.setAttribute('class','dg');ak.innerHTML='Do you want to create a new spreadsheet?<br><br><button id=ys>Yes</button> <button id=no>No</button>';document.body.appendChild(ak);chachan(ak);document.getElementById('ys').addEventListener('click',cls);document.getElementById('no').addEventListener('click',function(){ak.remove();be=1})}}
+function cls(){for(i=1;i<101;i++){for(j=1;j<101;j++){document.getElementById(j+':'+i).value='';ak.remove();be=1;lve=0}}}
+function akhil(){if(be){be=0;tk=document.createElement('div');tk.setAttribute('class','dg');tk.innerHTML="Enter the file name <input id=nm placeholder='Without file extension!'><br><div style=color:red id=er></div><br><button id=sv>Save</button> <button id=cn>Cancel</button>";document.body.appendChild(tk);chachan(tk);document.getElementById('nm').focus();document.getElementById('sv').addEventListener('click',akhila);document.getElementById('cn').addEventListener('click',function(){tk.remove();be=1})}}
+function akhila(){fn=document.getElementById('nm').value;if(fn==''){document.getElementById('er').innerText="Please enter the file name"}else{tk.remove();s='';d=1;document.getElementById('sve').innerHTML='Saving: <progress id=pr value=0 max=100></progress><span id=lo></span>%';for(i=1;i<101;i++){document.getElementById('lo').innerText=i;document.getElementById('pr').value=i;c=0;for(j=1;j<101;j++){si=document.getElementById(j+':'+i).value;if(si==''){c++}else{s+='\n'.repeat(i-d)+','.repeat(c)+'"'+si+'"';c=1;d=i}}}dn=document.createElement('a');dn.setAttribute('href','data:text/csv;charset=utf-8,'+encodeURIComponent(s));dn.setAttribute('download',fn+'.csv');dn.style.display='none';document.body.appendChild(dn);dn.click();dn.remove();be=1;lve=0;document.getElementById('sve').innerHTML='&#x1f4be;'}}document.getElementById('hd').style.display='';document.getElementById('ld').remove()},50)})
+</script>
+</body>
+</html>
