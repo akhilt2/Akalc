@@ -1,2 +1,2 @@
 # Akalc
-Web app to create spreadsheet in csv file format
+This is a simple web app to create spreadsheet in csv file format
